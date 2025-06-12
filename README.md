@@ -30,6 +30,9 @@ To deliver a scalable and reusable frontend solution tailored for the real estat
 - 🔗 Static frontend only – No backend integration
 - 🖥️ Desktop-first layout (not mobile responsive)
 - 🧱 Clean, scalable folder structure
+🖥️ Local development running at : http://localhost:5173/
+
+
 
 
 
