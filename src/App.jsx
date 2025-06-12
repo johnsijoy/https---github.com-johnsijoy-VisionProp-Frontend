@@ -2,6 +2,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import AppRoutes from './routes/AppRoutes';
 import Footer from './components/Footer';
+import Home from "./pages/Home";
+
 
 const App = () => {
   return (
@@ -13,7 +15,7 @@ const App = () => {
         <main className="flex-grow">
           <AppRoutes />
         </main>
-        
+        <Home/>
         <Footer />
       </BrowserRouter>
     </div>

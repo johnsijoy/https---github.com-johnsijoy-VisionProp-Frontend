@@ -4,6 +4,9 @@ import About from '../pages/About';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NotFound from '../pages/NotFound';
+import BookDemo from "../pages/BookDemo";
+
+
 
 // Protect Dashboard
 const ProtectedRoute = ({ children }) => {
@@ -16,6 +19,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
       <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+      
+      <Route path="/book-demo" element={<BookDemo />} />
       <Route path="/about" element={<About />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
