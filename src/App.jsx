@@ -6,15 +6,18 @@ import Footer from './components/Footer';
 const App = () => {
   return (
     <div className="flex flex-col min-h-screen">
-        <BrowserRouter>
-    <Navbar />
-    <main className="flex-grow"></main>
-    <AppRoutes />
-    <Footer />
-  </BrowserRouter>
-
+      <BrowserRouter>
+        <Navbar />
+        
+        {/* Routes go here inside the main layout */}
+        <main className="flex-grow">
+          <AppRoutes />
+        </main>
+        
+        <Footer />
+      </BrowserRouter>
     </div>
-  )
-} 
+  );
+};
 
 export default App;
