@@ -1,12 +1,35 @@
-# React + Vite
+# VisionProp ERP – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+VisionProp ERP is a clean and responsive frontend user interface. Built using **React + Vite**, this project serves as a boilerplate to manage pages like Home, About Us, Login, and Registration with modern UI and a structured folder layout.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Project Objective
 
-## Expanding the ESLint configuration
+To deliver a scalable and reusable frontend solution tailored for the real estate business sector, featuring:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Clean design with real estate-oriented UI
+- Fast performance using Vite and React
+- Structured, modular codebase for easy expansion
+- Scroll-based desktop navigation 
+- Navigation between Home, About, Login, and Registration pages
+
+## ⚙️ Tech Stack
+
+| Technology      | Description                        |
+|-----------------|------------------------------------|
+| **React**       | JavaScript library for UI building |
+| **Vite**        | Lightning-fast build tool          |
+| **Tailwind CSS**| Utility-first CSS framework        |
+| **React Router**| Declarative routing for React apps |
+
+## 🔍 Features
+
+- ⚛️ React (with Vite for blazing-fast builds)
+- 🎨 Tailwind CSS for utility-first styling
+- 🧭 React Router DOM for page navigation
+- 🔗 Static frontend only – No backend integration
+- 🖥️ Desktop-first layout (not mobile responsive)
+- 🧱 Clean, scalable folder structure
+
+
+
