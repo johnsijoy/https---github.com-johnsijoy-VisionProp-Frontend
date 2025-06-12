@@ -5,7 +5,7 @@ VisionProp ERP is a clean and responsive frontend user interface. Built using **
 
 ## 🎯 Project Objective
 
-To deliver a scalable and reusable frontend solution tailored for the real estate business sector, featuring:
+To deliver a scalable and reusable frontend solution tailored for the real estate business sector
 
 - Clean design with real estate-oriented UI
 - Fast performance using Vite and React
