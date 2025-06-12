@@ -1,0 +1,18 @@
+
+@import "tailwindcss";
+a {
+  font-weight: 500;
+  color:rgb(0, 0, 0);
+  text-decoration: inherit;
+}
+a:hover {
+  color:rgb(21, 181, 239);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
