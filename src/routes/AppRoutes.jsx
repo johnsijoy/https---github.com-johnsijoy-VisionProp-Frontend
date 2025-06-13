@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/Home'; // Dashboard
 import About from '../pages/About';
-
+import BookedMembers from "../pages/BookedMembers";
 import Register from '../pages/Register';
 import NotFound from '../pages/NotFound';
 import BookDemo from "../pages/BookDemo";
@@ -27,7 +27,7 @@ const AppRoutes = () => {
       <Route path="/about" element={<About />} />
        <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/" element={<Auth />} />
-
+      <Route path="/members" element={<BookedMembers />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

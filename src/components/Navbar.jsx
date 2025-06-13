@@ -49,7 +49,7 @@ const Navbar = () => {
 
         <Link to="/" className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">Home</Link>
         <Link to="/about" className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">About Us</Link>
-        <Link to="/property" className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">Property</Link>
+        <Link to="/members" className="text-blue-600 underline">View Members</Link> 
 
         {/* Services Dropdown */}
         <div className="relative" ref={servicesRef}>
@@ -70,8 +70,10 @@ const Navbar = () => {
         </div>
 
         <Link to="/help-center" className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">Help Center</Link>
-        <Link to="/login" className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">Login</Link>
-        <Link to="/register" className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">Register</Link>
+        <div className="block px-3 py-2 rounded hover:bg-sky-100 hover:text-sky-700">
+  <Link to="/login" className="hover:underline">Login</Link> / <Link to="/register" className="hover:underline">Register</Link>
+</div>
+
 
         {/* Profile Icon */}
         <div className="relative" ref={profileRef}>
@@ -84,8 +86,7 @@ const Navbar = () => {
 
           {showProfileDropdown && (
             <div className="absolute right-0 mt-2 w-44 bg-white border rounded-md shadow-lg z-50">
-              <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-50">My Profile</Link>
-              <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-50">Settings</Link>
+  
               <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Logout</button>
             </div>
           )}

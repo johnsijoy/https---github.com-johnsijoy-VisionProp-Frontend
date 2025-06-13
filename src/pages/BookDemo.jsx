@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const countryStateData = {
   India: ["Tamil Nadu", "Karnataka", "Maharashtra"],
@@ -7,6 +8,8 @@ const countryStateData = {
 };
 
 const BookDemo = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,12 +25,11 @@ const BookDemo = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Reset state if country changes
     if (name === "country") {
       setFormData((prev) => ({
         ...prev,
         country: value,
-        state: "", // clear state
+        state: "",
       }));
     } else {
       setFormData((prev) => ({
@@ -56,7 +58,10 @@ const BookDemo = () => {
         type: "",
       });
 
-      setTimeout(() => setMessage(""), 3000);
+      setTimeout(() => {
+        setMessage("");
+        navigate("/"); // redirect to home page
+      }, 2000);
     }, 1000);
   };
 
@@ -147,7 +152,7 @@ const BookDemo = () => {
             </select>
           </div>
 
-          {/* State (based on country) */}
+          {/* State */}
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-1">State</label>
             <select
