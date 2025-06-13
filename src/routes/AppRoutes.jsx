@@ -1,10 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/Home'; // Dashboard
 import About from '../pages/About';
-import Login from '../pages/Login';
+
 import Register from '../pages/Register';
 import NotFound from '../pages/NotFound';
 import BookDemo from "../pages/BookDemo";
+import Auth from '../pages/Auth';
+import Dashboard from '../pages/Dashboard'; 
+
 
 
 
@@ -19,10 +22,12 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
       <Route path="/dashboard" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-      
+       <Route path="/login" element={<Auth />} />
       <Route path="/book-demo" element={<BookDemo />} />
       <Route path="/about" element={<About />} />
-      <Route path="/login" element={<Login />} />
+       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<Auth />} />
+
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

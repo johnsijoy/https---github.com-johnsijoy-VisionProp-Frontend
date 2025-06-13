@@ -45,8 +45,8 @@ const Register = () => {
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("loggedInUser", JSON.stringify(newUser)); // simulate login
 
-    alert("✅ Registered Successfully!");
-    navigate("/dashboard");
+    alert("Registered Successfully!");
+    navigate("/login");
   };
 
   return (
