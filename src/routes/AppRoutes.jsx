@@ -7,6 +7,9 @@ import NotFound from '../pages/NotFound';
 import BookDemo from "../pages/BookDemo";
 import Auth from '../pages/Auth';
 import Dashboard from '../pages/Dashboard'; 
+import PropertyManagement from "../pages/services/PropertyManagement";
+import LegalSupport from "../pages/services/LegalSupport";
+import InteriorDesign from "../pages/services/InteriorDesign";
 
 
 
@@ -30,6 +33,9 @@ const AppRoutes = () => {
       <Route path="/members" element={<BookedMembers />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />
+       <Route path="/services/property-management" element={<PropertyManagement />} />
+  <Route path="/services/legal-support" element={<LegalSupport />} />
+  <Route path="/services/interior-design" element={<InteriorDesign />} />
     </Routes>
   );
 };

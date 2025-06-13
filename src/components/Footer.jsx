@@ -23,8 +23,8 @@ const Footer = () => (
           <h2 className="text-xl font-semibold mb-4">Services</h2>
           <ul className="space-y-2">
             <li><a href="/about" className="hover:underline">About Us</a></li>
-            <li><a href="/services" className="hover:underline">Property Management</a></li>
-            <li><a href="/contact" className="hover:underline">Contact Support</a></li>
+          
+            <li><a href="/contact" className="hover:underline">Help Center</a></li>
           </ul>
         </div>
   
