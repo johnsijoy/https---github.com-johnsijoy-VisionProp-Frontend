@@ -11,24 +11,33 @@ const Auth = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3001/users");
-      const users = await res.json();
+      const response = await fetch("/api/users"); // or "http://localhost:3001/users" if proxy not used
 
-      const user = users.find(
+      if (!response.ok) throw new Error("Failed to fetch");
+
+      const users = await response.json();
+
+      const matchedUser = users.find(
         (u) =>
-          (u.email === emailOrUsername || u.name === emailOrUsername) &&
+          (u.email.toLowerCase() === emailOrUsername.toLowerCase() ||
+            u.name.toLowerCase() === emailOrUsername.toLowerCase()) &&
           u.password === password
       );
 
-      if (user) {
+      if (matchedUser) {
+        // ✅ Save user to localStorage
+        localStorage.setItem("loggedInUser", JSON.stringify(matchedUser));
+
         alert("Login Successful");
-        navigate("/book-demo"); // ✅ navigate to route
+
+        // ✅ Navigate to home or dashboard
+        navigate("/book-demo");
       } else {
         alert("Invalid email/username or password");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Server error");
+      alert("Server error: Unable to connect");
     }
   };
 

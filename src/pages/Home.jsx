@@ -6,15 +6,14 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Adjust key based on your auth system (e.g., token, user)
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem("loggedInUser");
     setIsLoggedIn(!!user);
   }, []);
 
   const handleBookDemoClick = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate("/book-demo");
+      navigate("/login");
     } else {
       navigate("/login");
     }
@@ -40,7 +39,7 @@ const Home = () => {
             Get Started Free
           </a>
 
-          {/* ✅ Updated Book Demo Button with conditional login check */}
+          {/* ✅ Conditional Book Demo */}
           <button
             onClick={handleBookDemoClick}
             className="mt-4 border-2 border-sky-600 text-sky-600 font-semibold px-6 py-2 rounded-full hover:bg-sky-600 hover:text-white transition duration-200 block w-fit mx-auto md:mx-0"
@@ -59,36 +58,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Feature Section (unchanged) */}
+      {/* Feature Section */}
       <section className="py-16 bg-white px-6 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-sky-700 mb-12">Explore Property Categories</h2>
+        <h2 className="text-3xl font-bold text-center text-sky-700 mb-12">
+          Explore Property Categories
+        </h2>
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-gray-100 p-5 rounded-lg shadow-sm hover:shadow-md transition">
-            <img
-              src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=600&q=80"
-              alt="Luxury Villas"
-              className="rounded-lg mb-4 h-48 w-full object-cover"
-            />
-            <h3 className="text-xl font-semibold text-gray-800 text-center">Luxury Villas</h3>
-          </div>
-
-          <div className="bg-gray-100 p-5 rounded-lg shadow-sm hover:shadow-md transition">
-            <img
-              src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80"
-              alt="Apartments"
-              className="rounded-lg mb-4 h-48 w-full object-cover"
-            />
-            <h3 className="text-xl font-semibold text-gray-800 text-center">Apartments</h3>
-          </div>
-
-          <div className="bg-gray-100 p-5 rounded-lg shadow-sm hover:shadow-md transition">
-            <img
-              src="https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?auto=format&fit=crop&w=600&q=80"
-              alt="Commercial Buildings"
-              className="rounded-lg mb-4 h-48 w-full object-cover"
-            />
-            <h3 className="text-xl font-semibold text-gray-800 text-center">Commercial Buildings</h3>
-          </div>
+          {[
+            {
+              title: "Luxury Villas",
+              src: "https://images.unsplash.com/photo-1568605114967-8130f3a36994",
+            },
+            {
+              title: "Apartments",
+              src: "https://images.unsplash.com/photo-1570129477492-45c003edd2be",
+            },
+            {
+              title: "Commercial Buildings",
+              src: "https://images.unsplash.com/photo-1599427303058-f04cbcf4756f",
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="bg-gray-100 p-5 rounded-lg shadow-sm hover:shadow-md transition"
+            >
+              <img
+                src={`${item.src}?auto=format&fit=crop&w=600&q=80`}
+                alt={item.title}
+                className="rounded-lg mb-4 h-48 w-full object-cover"
+              />
+              <h3 className="text-xl font-semibold text-gray-800 text-center">
+                {item.title}
+              </h3>
+            </div>
+          ))}
         </div>
       </section>
     </div>

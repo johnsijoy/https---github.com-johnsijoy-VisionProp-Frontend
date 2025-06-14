@@ -6,12 +6,9 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color:rgb(21, 181, 239);
+  color:rgb(4, 16, 255);
 }
 html {
   scroll-behavior: smooth;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

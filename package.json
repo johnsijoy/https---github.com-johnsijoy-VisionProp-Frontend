@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "api": "node api/server.cjs"
+
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.9",
