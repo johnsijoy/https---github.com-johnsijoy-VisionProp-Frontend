@@ -11,7 +11,9 @@ const Auth = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/users"); // or "http://localhost:3001/users" if proxy not used
+      const response = await fetch("http://localhost:3001/users");
+// This won't work on Vercel
+
 
       if (!response.ok) throw new Error("Failed to fetch");
 

@@ -1,12 +1,19 @@
-const jsonServer = require("json-server");
+// server.cjs
+const jsonServer = require('json-server');
+const path = require('path');
+
+// Load your custom mock data from db.js
+const db = require('./db.js');
+
 const server = jsonServer.create();
-const router = jsonServer.router("db.json"); // 👈 Serves the data in db.json
+const router = jsonServer.router(db);
 const middlewares = jsonServer.defaults();
 
-server.use(middlewares);               // Adds logging, CORS, etc.
-server.use(jsonServer.bodyParser);     // Allows POST, PUT, DELETE requests
-server.use(router);                    // Mounts API routes like /users
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
+server.use('/api', router); // All API routes start with /api
 
-server.listen(3001, () => {
-  console.log("JSON Server is running on port 3001");
+const PORT = 3001;
+server.listen(PORT, () => {
+  console.log(`✅ JSON Server running at http://localhost:${PORT}/api/users`);
 });
