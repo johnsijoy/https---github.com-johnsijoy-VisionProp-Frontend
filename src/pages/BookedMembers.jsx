@@ -5,16 +5,15 @@ const BookedMembers = () => {
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("firstName");
+  const [selectedDate, setSelectedDate] = useState(""); // ✅ NEW
   const [editingIndex, setEditingIndex] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
 
-  // Load from localStorage
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("demoBookings")) || [];
     setBookings(stored);
   }, []);
 
-  // Filter and sort
   useEffect(() => {
     let results = [...bookings];
 
@@ -26,15 +25,19 @@ const BookedMembers = () => {
       );
     }
 
-    results.sort((a, b) => {
-      if (sortOption === "firstName") return a.firstName.localeCompare(b.firstName);
-      if (sortOption === "lastName") return a.lastName.localeCompare(b.lastName);
+    if (selectedDate !== "") {
+      results = results.filter((entry) => entry.date === selectedDate);
+    }
 
-      return 0;
-    });
+  results.sort((a, b) => {
+  const fieldA = a[sortOption]?.toLowerCase() || "";
+  const fieldB = b[sortOption]?.toLowerCase() || "";
+  return fieldA.localeCompare(fieldB);
+});
+
 
     setFilteredBookings(results);
-  }, [searchQuery, sortOption, bookings]);
+  }, [searchQuery, sortOption, bookings, selectedDate]);
 
   const handleDelete = (index) => {
     const updated = bookings.filter((_, i) => i !== index);
@@ -83,7 +86,7 @@ const BookedMembers = () => {
           placeholder="Search by name, email, or country..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="border px-3 py-2 rounded-md w-full md:w-1/2"
+          className="border px-3 py-2 rounded-md w-full md:w-1/3"
         />
         <select
           value={sortOption}
@@ -92,8 +95,13 @@ const BookedMembers = () => {
         >
           <option value="firstName">Sort by First Name</option>
           <option value="lastName">Sort by Last Name</option>
-         
         </select>
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="border px-3 py-2 rounded-md w-full md:w-1/4"
+        />
       </div>
 
       {/* Table */}
@@ -110,6 +118,8 @@ const BookedMembers = () => {
                 <th className="px-4 py-2 border">Country</th>
                 <th className="px-4 py-2 border">State</th>
                 <th className="px-4 py-2 border">Type</th>
+                <th className="px-4 py-2 border">Date</th> {/* ✅ NEW */}
+                <th className="px-4 py-2 border">Time</th> {/* ✅ NEW */}
                 <th className="px-4 py-2 border">Actions</th>
               </tr>
             </thead>
@@ -124,7 +134,10 @@ const BookedMembers = () => {
                   <td className="px-4 py-2 border">{entry.country}</td>
                   <td className="px-4 py-2 border">{entry.state}</td>
                   <td className="px-4 py-2 border">{entry.type}</td>
-                  <td className="px-4 py-2 border space-x-2">
+                  <td className="px-4 py-2 border">{entry.date || "-"}</td>
+                  <td className="px-4 py-2 border">{entry.time || "-"}</td>
+                  <td className="px-4 py-2 border flex justify-center space-x-2">
+
                     <button
                       onClick={() => handleEdit(bookings.indexOf(entry))}
                       className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"

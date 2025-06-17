@@ -39,31 +39,36 @@ const BookDemo = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    setTimeout(() => {
-      const previousData = JSON.parse(localStorage.getItem("demoBookings")) || [];
-      localStorage.setItem("demoBookings", JSON.stringify([...previousData, formData]));
-
-      setMessage("🎉 Demo booked successfully!");
-
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        country: "",
-        state: "",
-        type: "",
-      });
-
-      setTimeout(() => {
-        setMessage("");
-        navigate("/"); // redirect to home page
-      }, 2000);
-    }, 1000);
+  const now = new Date();
+  const newEntry = {
+    ...formData,
+    date : now.toLocaleDateString('en-CA'), // YYYY-MM-DD format (safe for input type="date")
+time : now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // HH:MM format
   };
+
+  const previousData = JSON.parse(localStorage.getItem("demoBookings")) || [];
+  localStorage.setItem("demoBookings", JSON.stringify([...previousData, newEntry]));
+
+  setMessage("🎉 Demo booked successfully!");
+
+  setFormData({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    country: "",
+    state: "",
+    type: "",
+  });
+
+  setTimeout(() => {
+    setMessage("");
+    navigate("/members");
+  }, 2000);
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
