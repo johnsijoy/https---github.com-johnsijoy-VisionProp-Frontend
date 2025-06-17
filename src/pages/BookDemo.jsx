@@ -74,7 +74,13 @@ time : now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), // HH
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl">
         <h2 className="text-2xl font-bold text-center text-sky-700 mb-6">Book a Free Demo</h2>
-
+  {/* ✅ Back Button */}
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 text-sm text-sky-600 hover:underline font-medium"
+        >
+          ← Back
+        </button>
         {message && (
           <div className="bg-green-100 text-green-700 px-4 py-2 rounded mb-4 text-center">
             {message}

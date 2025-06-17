@@ -5,9 +5,11 @@ const BookedMembers = () => {
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("firstName");
-  const [selectedDate, setSelectedDate] = useState(""); // ✅ NEW
+  const [selectedDate, setSelectedDate] = useState("");
   const [editingIndex, setEditingIndex] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("demoBookings")) || [];
@@ -29,12 +31,11 @@ const BookedMembers = () => {
       results = results.filter((entry) => entry.date === selectedDate);
     }
 
-  results.sort((a, b) => {
-  const fieldA = a[sortOption]?.toLowerCase() || "";
-  const fieldB = b[sortOption]?.toLowerCase() || "";
-  return fieldA.localeCompare(fieldB);
-});
-
+    results.sort((a, b) => {
+      const fieldA = a[sortOption]?.toLowerCase() || "";
+      const fieldB = b[sortOption]?.toLowerCase() || "";
+      return fieldA.localeCompare(fieldB);
+    });
 
     setFilteredBookings(results);
   }, [searchQuery, sortOption, bookings, selectedDate]);
@@ -73,8 +74,23 @@ const BookedMembers = () => {
     setEditFormData(null);
   };
 
+  const paginatedBookings = filteredBookings.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 bg-gray-50 min-h-screen">
+      {/* Back Button */}
+      <div className="mb-4">
+        <button
+          onClick={() => window.history.back()}
+          className="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300"
+        >
+          ← Back
+        </button>
+      </div>
+
       <h2 className="text-2xl font-bold text-sky-700 text-center mb-6">
         Booked Demo Members
       </h2>
@@ -105,7 +121,7 @@ const BookedMembers = () => {
       </div>
 
       {/* Table */}
-      {filteredBookings.length > 0 ? (
+      {paginatedBookings.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border rounded shadow-sm">
             <thead className="bg-sky-600 text-white">
@@ -118,15 +134,15 @@ const BookedMembers = () => {
                 <th className="px-4 py-2 border">Country</th>
                 <th className="px-4 py-2 border">State</th>
                 <th className="px-4 py-2 border">Type</th>
-                <th className="px-4 py-2 border">Date</th> {/* ✅ NEW */}
-                <th className="px-4 py-2 border">Time</th> {/* ✅ NEW */}
+                <th className="px-4 py-2 border">Date</th>
+                <th className="px-4 py-2 border">Time</th>
                 <th className="px-4 py-2 border">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filteredBookings.map((entry, idx) => (
+              {paginatedBookings.map((entry, idx) => (
                 <tr key={idx} className="hover:bg-gray-100 text-center">
-                  <td className="px-4 py-2 border">{idx + 1}</td>
+                  <td className="px-4 py-2 border">{(currentPage - 1) * itemsPerPage + idx + 1}</td>
                   <td className="px-4 py-2 border">{entry.firstName}</td>
                   <td className="px-4 py-2 border">{entry.lastName}</td>
                   <td className="px-4 py-2 border">{entry.email}</td>
@@ -136,20 +152,21 @@ const BookedMembers = () => {
                   <td className="px-4 py-2 border">{entry.type}</td>
                   <td className="px-4 py-2 border">{entry.date || "-"}</td>
                   <td className="px-4 py-2 border">{entry.time || "-"}</td>
-                  <td className="px-4 py-2 border flex justify-center space-x-2">
-
-                    <button
-                      onClick={() => handleEdit(bookings.indexOf(entry))}
-                      className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(bookings.indexOf(entry))}
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                    >
-                      Delete
-                    </button>
+                  <td className="px-4 py-2 border">
+                    <div className="flex justify-center space-x-2">
+                      <button
+                        onClick={() => handleEdit(bookings.indexOf(entry))}
+                        className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(bookings.indexOf(entry))}
+                        className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -160,7 +177,27 @@ const BookedMembers = () => {
         <p className="text-center text-gray-500 mt-4">No members found.</p>
       )}
 
-      {/* Modal */}
+      {/* Pagination */}
+      {filteredBookings.length > itemsPerPage && (
+        <div className="flex justify-center mt-6 space-x-4">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          >
+            ← Previous
+          </button>
+          <button
+            disabled={currentPage * itemsPerPage >= filteredBookings.length}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          >
+            Next →
+          </button>
+        </div>
+      )}
+
+      {/* Edit Modal */}
       {editFormData && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-full max-w-lg">
